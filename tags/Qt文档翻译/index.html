@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>tag: Qt文档翻译 | Keep It Simple</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Keep It Simple">
+<meta property="og:url" content="http://example.com/tags/Qt%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91/index.html">
+<meta property="og:site_name" content="Keep It Simple">
+<meta property="og:locale">
+<meta property="article:author" content="Shalven Law">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Keep It Simple" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0.css">
+
+  
+<link rel="stylesheet" href="/lib/fancybox/dist/jquery.fancybox.min.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="wrapper">
+    <header id="header" class="clearfix">
+	<a id="logo" href="/" title="Keep It Simple">Keep It Simple</a>
+	
+	<nav id="nav-menu" class="clearfix">
+		<form id="search" method="post" action="./" role="search">
+			<input id="search-input" type="text" name="s" class="inputbox" value="搜索" onfocus="if (value =='搜索'){value =''}" onblur="if (value ==''){value='搜索'}">
+		</form>
+		<ul>
+      
+				
+        <li><a class="main-nav-link" href="/">主页</a></li>
+      
+				
+        <li><a class="main-nav-link" href="/archives">归档</a></li>
+      
+		</ul>
+	</nav>
+</header>
+    <section id="main" class="clearfix">
+  <article class="post-detail">
+    <h1 class="post-title"><a href="/">QModbusClient</a></h1>
+    <ul class="post-meta">
+  <!-- <li><i class="fa fa-user"></i> 作者 Shalven Law</li> -->
+  <li><i class="fa fa-calendar"></i> 日期 Sep 30</li>
+  <li><i class="fa fa-folder"></i> 分类
+  
+    no_categories
+  
+  </li>
+</ul>
+    <div class="post-content">
+      <p>[TOC]</p>
+<h1 id="QModbusClient类"><a href="#QModbusClient类" class="headerlink" title="QModbusClient类"></a>QModbusClient类</h1><p>QModbusClient为发送Modbus请求提供接口.<br>| 属性| 方法|<br>| ——: |:——|<br>| 头文件 | <code>#include&lt;QModbusClient&gt;</code> |<br>| qmake | <code>QT+=serialbus</code> |<br>| 自从 | Qt 5.8 |<br>|继承| QModbusDevice |<br>|派生| QModbusRtuSerialMaster和QModbusTcpClient |</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><ul>
+<li>timeout: int</li>
+</ul>
+<h2 id="公有函数"><a href="#公有函数" class="headerlink" title="公有函数"></a>公有函数</h2><p>QModbusClient(QObject *parent = nullptr)<br>int numberOfRetries() const<br>QModbusReply *sendRawRequest(const QModbusRequest &amp;request, int serverAddress)<br>QModbusReply *sendReadRequest(const QModbusDataUnit &amp;read, int serverAddress)<br>QModbusReply *sendReadWriteRequest(const QModbusDataUnit &amp;read, const QModbusDataUnit &amp;write, int serverAddress)<br>QModbusReply *sendWriteRequest(const QModbusDataUnit &amp;write, int serverAddress)<br>void setNumberOfRetries(int number)<br>void setTimeout(int newTimeout)<br>int timeout() const</p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>void timeoutChanged(int newTimeout)</p>
+<h2 id="保护函数"><a href="#保护函数" class="headerlink" title="保护函数"></a>保护函数</h2><p>virtual bool processPrivateResponse(const QModbusResponse &amp;response, QModbusDataUnit *data)<br>virtual bool processResponse(const QModbusResponse &amp;response, QModbusDataUnit *data)</p>
+<h2 id="详细描述"><a href="#详细描述" class="headerlink" title="详细描述"></a>详细描述</h2><p>QModbusClient持有其发送请求的通用设置. 整个Qt应用程序应该只需要构建一个QModbusClient对象.<br>一旦一个QModbusClient对象构建完成, 应用程序就可以使用它来发送请求. 返回的对象被用于获得反馈的内容.<br>QModbusClient是异步的. 当finished槽被触发时(反馈的内容已经准备好可以读了), 其参数为包含PDU与元数据(起始地址等)的QModbusReply.<br>备注: QModbusClient会将发送的请求插入一个队列, 其所能并行执行的请求数量取决于通信协议. 比如说, 对于桌面平台上的一个主机/端口组合(类似192.168.1.3:80), HTTP协议可以同时处理6个请求.</p>
+<h2 id="属性细节"><a href="#属性细节" class="headerlink" title="属性细节"></a>属性细节</h2><h3 id="timeout-int"><a href="#timeout-int" class="headerlink" title="timeout : int"></a>timeout : int</h3><p>超时时间.<br>返回该QModbusClient对象的超时时间, 单位为毫秒. 超时会导致TimeoutError. 默认的超时时间为1000毫秒.</p>
+<h4 id="访问函数"><a href="#访问函数" class="headerlink" title="访问函数:"></a>访问函数:</h4><p>int timeout() const<br>void setTimeout(int newTimeout)</p>
+<h4 id="通知信号"><a href="#通知信号" class="headerlink" title="通知信号"></a>通知信号</h4><p>void timeoutChanged(int newTimeout)<br>参见setTimeout.</p>
+<h2 id="成员函数细节"><a href="#成员函数细节" class="headerlink" title="成员函数细节"></a>成员函数细节</h2><h3 id="QModbusClient-QModbusClient-QObject-parent-nullptr"><a href="#QModbusClient-QModbusClient-QObject-parent-nullptr" class="headerlink" title="QModbusClient::QModbusClient(QObject *parent = nullptr)"></a>QModbusClient::QModbusClient(QObject *parent = nullptr)</h3><p>用给定的parent构造一个Modebus客户端设备.</p>
+<h3 id="signal-void-QModbusClient-timeoutChanged-int-newTimeout"><a href="#signal-void-QModbusClient-timeoutChanged-int-newTimeout" class="headerlink" title="[signal] void QModbusClient::timeoutChanged(int newTimeout)"></a>[signal] void QModbusClient::timeoutChanged(int newTimeout)</h3><p>当超时时间值被改变的时候, 该信号会被发出, 新的超时时间值为newTimeout.<br>备注: 属性timeout的通知信号.<br>参见setTimeout().</p>
+
+    </div>
+  </article>
+
+
+</section>
+    <footer id="footer" role="contentinfo">
+    <div>
+        &copy; 2020 
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. 
+        Designed by <a href="http://rainylog.com" target="_blank">Rainy.</a>
+        Modified by <a href="http://rainylog.com" target="_blank">Shalven.</a>
+	</div>
+</footer><!-- end #footer -->
+
+  </div>
+  
+<script src="/lib/fancybox/dist/jquery.fancybox.min.js"></script>
+
+
+  
+<script src="/js/helper.js"></script>
+
+  
+<script src="/js/_third-party/gitment.js"></script>
+
+</body>
+</html>
